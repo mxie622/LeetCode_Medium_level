@@ -35,8 +35,42 @@ def sortColors(nums):
         if input[j] < input[j+1]:
             input = input[:j+1] + count + input[j+1:]
             break
-        # else:
-        #     continue
+
     return input
 
-print(sortColors(nums=nums))
+
+
+# https://leetcode.com/problems/3sum/description/
+class Solution:
+    def threeSum(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        nums.sort()
+        result = []
+        for i in range(len(nums)-2):
+            if i == 0 or nums[i] != nums[i-1]:
+                k = i+1
+                j = len(nums)-1
+                recordOfLast = []
+                while k < j:
+                    threeSum = nums[i] + nums[k] + nums[j]
+                    if threeSum < 0:
+                        k += 1
+                    elif threeSum > 0:
+                        j -= 1
+                    else:
+                        if nums[j] not in recordOfLast:
+                            result.append([nums[i], nums[k], nums[j]])
+                            recordOfLast.append(nums[j])
+                        k += 1
+                        j -= 1
+        return result
+
+
+
+
+
+
+
