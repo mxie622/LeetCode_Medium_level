@@ -50,6 +50,21 @@ def normalEquation(X, y):
     return theta
 
 # p = normalEquation(y, X)
-#
 # print(p)
 
+
+
+
+# https://leetcode.com/problems/rectangle-area/description/
+class Solution:
+    def computeArea(self, A, B, C, D, E, F, G, H):
+
+        leftBottomX = max(A, E)
+        leftBottomY = max(B, F)
+
+        rightTopX = min(C, G)
+        rightTopY = min(D, H)
+
+        overlap = max(rightTopX - leftBottomX, 0) * max(rightTopY - leftBottomY, 0)
+
+        return abs(C - A) * abs(D - B) + abs(G - E) * abs(H - F) - overlap
