@@ -53,8 +53,6 @@ def normalEquation(X, y):
 # print(p)
 
 
-
-
 # https://leetcode.com/problems/rectangle-area/description/
 class Solution:
     def computeArea(self, A, B, C, D, E, F, G, H):
@@ -68,3 +66,52 @@ class Solution:
         overlap = max(rightTopX - leftBottomX, 0) * max(rightTopY - leftBottomY, 0)
 
         return abs(C - A) * abs(D - B) + abs(G - E) * abs(H - F) - overlap
+
+# https://leetcode.com/problems/ugly-number-ii/description/
+## method 1 :
+class Solution:
+    def nthUglyNumber(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        num = 1
+        num1 = num
+        output = []
+        i = 0
+        if n == 1:
+            return 1
+        else:
+            while len(output) <= n:
+                while num % 2 == 0:
+                    num = num / 2
+                while num % 3 == 0:
+                    num = num / 3
+                while num % 5 == 0:
+                    num = num / 5
+                i += 1
+                if num == 1 or num == 3 or num == 5:
+                    output.append(i)
+                num1 += 1
+                num = num1
+            return output[n-1]
+## method 2:
+class Solution:
+    # dynamic programming
+    def nthUglyNumber(self, n):
+        ugly = [0] * n
+        nxt = ugly[0] = 1
+        i2 = i3 = i5 = 0
+        nxt2, nxt3, nxt5 = ugly[i2]*2, ugly[i3]*3, ugly[i5]*5
+        for i in xrange(1, n):
+            nxt = min(nxt2, nxt3, nxt5)
+            ugly[i] = nxt
+            if nxt == nxt2:
+                i2 += 1
+                nxt2 = ugly[i2]*2
+            if nxt == nxt3:
+                i3 += 1
+                nxt3 = ugly[i3]*3
+            if nxt == nxt5:
+                i5 += 1
+                nxt5 = ugly[i5]*5
