@@ -103,7 +103,7 @@ class Solution:
         nxt = ugly[0] = 1
         i2 = i3 = i5 = 0
         nxt2, nxt3, nxt5 = ugly[i2]*2, ugly[i3]*3, ugly[i5]*5
-        for i in xrange(1, n):
+        for i in range(1, n):
             nxt = min(nxt2, nxt3, nxt5)
             ugly[i] = nxt
             if nxt == nxt2:
