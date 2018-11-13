@@ -69,6 +69,7 @@ class Solution:
         return result
 
 
+        return nxt # ugly[-1]
 
 
 
