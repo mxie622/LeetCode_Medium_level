@@ -115,3 +115,26 @@ class Solution:
             if nxt == nxt5:
                 i5 += 1
                 nxt5 = ugly[i5]*5
+
+
+# https://leetcode.com/problems/letter-combinations-of-a-phone-number/description/
+class Solution:
+    def letterCombinations(self, digits):
+        """
+        :type digits: str
+        :rtype: List[str]
+        """
+        combs, dic =  [""], {'0':" ",'1':'*','2':'abc', '3':'def', '4': 'ghi', '5': 'jkl', '6':'mno', '7':'pqrs', '8':'tuv', '9':'wxyz'}
+        b = list(digits)
+        if digits == '':
+            return []
+        elif len(b) == 1:
+            return list(dic[b[0]])
+        else:
+            for k in digits:
+                pm = []
+                for i in combs:
+                    for j in dic[k]:
+                        pm.append(i + j)
+                combs = pm
+            return combs
